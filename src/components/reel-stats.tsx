@@ -15,13 +15,11 @@ import {
   Target,
   Globe,
   SquareArrowOutUpRight,
-  Headphones,
   AudioLines,
 } from "lucide-react";
 import { DUMMY_REEL_DATA } from "@/constants/dummy-data";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import clsx from "clsx";
 
 function formatNumber(num: number) {
   if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M`;
@@ -43,17 +41,6 @@ function formatTimeAgo(timestamp: string) {
 }
 
 export function ReelStats() {
-  const stats = [
-    { icon: Eye, value: DUMMY_REEL_DATA.performance.views, label: "Views", color: "blue" },
-    { icon: Heart, value: DUMMY_REEL_DATA.performance.likes, label: "Likes", color: "red" },
-    { icon: MessageCircle, value: DUMMY_REEL_DATA.performance.comments, label: "Comments", color: "green" },
-    { icon: Share2, value: DUMMY_REEL_DATA.performance.shares, label: "Shares", color: "purple" },
-    { icon: TrendingUp, value: `${DUMMY_REEL_DATA.performance.engagementRate}%`, label: "Engagement", color: "orange" },
-    { icon: Zap, value: `${DUMMY_REEL_DATA.insights.viralityScore}/10`, label: "Virality", color: "yellow" },
-    { icon: Target, value: DUMMY_REEL_DATA.performance.saves, label: "Saves", color: "indigo" },
-    { icon: Globe, value: DUMMY_REEL_DATA.performance.reach, label: "Reach", color: "pink" },
-  ];
-
   return (
     <Card>
       <CardContent className="px-6">
@@ -76,36 +63,58 @@ export function ReelStats() {
             </div>
           </div>
 
-          {/* Center section: audio + caption + stats */}
+          {/* Center section */}
           <div className="flex-1 flex flex-col gap-6">
             <div className="flex flex-col gap-2 max-w-[80%]">
               <span className="text-sm bg-gray-200/60 text-gray-500 rounded-md whitespace-nowrap inline-flex items-center gap-2 px-3 py-1.5 w-fit">
                 <AudioLines className="w-4 h-4 text-gray-600" />
                 {DUMMY_REEL_DATA.performance.audio}
               </span>
-              <p className=" text-gray-800 mt-2">
-                {DUMMY_REEL_DATA.performance.caption}
-              </p>
+              <p className="text-gray-800 mt-2">{DUMMY_REEL_DATA.performance.caption}</p>
             </div>
 
+            {/* Stats - Hardcoded */}
             <div className="flex flex-wrap gap-4 mt-4">
-              {stats.map((stat, index) => (
-                <div
-                  key={index}
-                  className={clsx(
-                    `inline-flex items-center gap-1 px-3 py-1 rounded-md text- font-medium`,
-                    `bg-${stat.color}-50 text-${stat.color}-700`
-                  )}
-                >
-                  <stat.icon className={`w-5 h-5 text-${stat.color}-500`} />
-                  <span>
-                    {typeof stat.value === "number"
-                      ? formatNumber(stat.value)
-                      : stat.value}
-                  </span>
-                  <span>{stat.label}</span>
-                </div>
-              ))}
+              <div className="inline-flex items-center gap-1 px-3 py-1 rounded-md font-medium bg-blue-50 text-blue-700">
+                <Eye className="w-5 h-5 text-blue-500" />
+                <span>{formatNumber(DUMMY_REEL_DATA.performance.views)}</span>
+                <span>Views</span>
+              </div>
+              <div className="inline-flex items-center gap-1 px-3 py-1 rounded-md font-medium bg-red-50 text-red-700">
+                <Heart className="w-5 h-5 text-red-500" />
+                <span>{formatNumber(DUMMY_REEL_DATA.performance.likes)}</span>
+                <span>Likes</span>
+              </div>
+              <div className="inline-flex items-center gap-1 px-3 py-1 rounded-md font-medium bg-green-50 text-green-700">
+                <MessageCircle className="w-5 h-5 text-green-500" />
+                <span>{formatNumber(DUMMY_REEL_DATA.performance.comments)}</span>
+                <span>Comments</span>
+              </div>
+              <div className="inline-flex items-center gap-1 px-3 py-1 rounded-md font-medium bg-purple-50 text-purple-700">
+                <Share2 className="w-5 h-5 text-purple-500" />
+                <span>{formatNumber(DUMMY_REEL_DATA.performance.shares)}</span>
+                <span>Shares</span>
+              </div>
+              <div className="inline-flex items-center gap-1 px-3 py-1 rounded-md font-medium bg-orange-50 text-orange-700">
+                <TrendingUp className="w-5 h-5 text-orange-500" />
+                <span>{DUMMY_REEL_DATA.performance.engagementRate}%</span>
+                <span>Engagement</span>
+              </div>
+              <div className="inline-flex items-center gap-1 px-3 py-1 rounded-md font-medium bg-yellow-50 text-yellow-700">
+                <Zap className="w-5 h-5 text-yellow-500" />
+                <span>{DUMMY_REEL_DATA.insights.viralityScore}/10</span>
+                <span>Virality</span>
+              </div>
+              <div className="inline-flex items-center gap-1 px-3 py-1 rounded-md font-medium bg-indigo-50 text-indigo-700">
+                <Target className="w-5 h-5 text-indigo-500" />
+                <span>{formatNumber(DUMMY_REEL_DATA.performance.saves)}</span>
+                <span>Saves</span>
+              </div>
+              <div className="inline-flex items-center gap-1 px-3 py-1 rounded-md font-medium bg-pink-50 text-pink-700">
+                <Globe className="w-5 h-5 text-pink-500" />
+                <span>{formatNumber(DUMMY_REEL_DATA.performance.reach)}</span>
+                <span>Reach</span>
+              </div>
             </div>
           </div>
 
@@ -121,7 +130,7 @@ export function ReelStats() {
               {DUMMY_REEL_DATA.comments.topEngaging.map((comment, index) => (
                 <div
                   key={index}
-                  className="flex space-x-4 p-4 border rounded-lg bg-white"
+                  className="flex space-x-4 p-4 bg-gray-100/50 rounded-lg"
                 >
                   <Avatar className="h-10 w-10">
                     <AvatarImage src={`/placeholder.svg?height=40&width=40`} />

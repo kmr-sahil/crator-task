@@ -31,7 +31,7 @@ export const CommentsSection = forwardRef<HTMLDivElement>((props, ref) => {
   }) => (
     <div className="mt-4 max-h-60 overflow-y-auto space-y-4">
       {comments.map((comment, index) => (
-        <div key={index} className="flex space-x-4 p-3 border rounded-lg">
+        <div key={index} className="flex space-x-4 p-3  bg-gray-100/50 rounded-lg">
           <Avatar className="h-10 w-10">
             <AvatarImage src={`/placeholder.svg?height=40&width=40`} />
             <AvatarFallback>
@@ -86,9 +86,9 @@ export const CommentsSection = forwardRef<HTMLDivElement>((props, ref) => {
 
             <div className="text-left mt-4">
               <CardTitle className="text-base">Top Engaging Comments</CardTitle>
-              {/* <CardDescription className="text-sm">
-                Comments with the most likes and replies
-              </CardDescription> */}
+               {/* <CardDescription className="text-sm">
+                Top Comments with the most likes and replies
+              </CardDescription>  */}
               <CommentList comments={DUMMY_REEL_DATA.comments.topEngaging} />
             </div>
           </CardContent>
@@ -106,10 +106,10 @@ export const CommentsSection = forwardRef<HTMLDivElement>((props, ref) => {
             </div>
 
             <div className="text-left mt-4">
-              <CardTitle className="text-base">Top Engaging Comments</CardTitle>
-              <CardDescription className="text-sm">
+              <CardTitle className="text-base">Top Spam Comments</CardTitle>
+              {/* <CardDescription className="text-sm">
                 Comments with the most likes and replies
-              </CardDescription>
+              </CardDescription> */}
               <CommentList comments={DUMMY_REEL_DATA.comments.topEngaging} />
             </div>
           </CardContent>
@@ -127,10 +127,10 @@ export const CommentsSection = forwardRef<HTMLDivElement>((props, ref) => {
             </div>
 
             <div className="text-left mt-4">
-              <CardTitle className="text-base">Top Engaging Comments</CardTitle>
-              <CardDescription className="text-sm">
+              <CardTitle className="text-base">Recent Bot Comments</CardTitle>
+              {/* <CardDescription className="text-sm">
                 Comments with the most likes and replies
-              </CardDescription>
+              </CardDescription> */}
               <CommentList comments={DUMMY_REEL_DATA.comments.topEngaging} />
             </div>
           </CardContent>
